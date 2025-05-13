@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
-import { IUProduct } from "./product.interfaces";
+import { IProductModel, IProductDoc } from "./product.interfaces";
 import { toJSON } from "../toJSON";
+import { paginate } from "../paginate";
 
 
-const productSchema = new mongoose.Schema<IUProduct>(
+const productSchema = new mongoose.Schema<IProductDoc,IProductModel>(
   {
     name: {
       type: String,
@@ -30,7 +31,8 @@ const productSchema = new mongoose.Schema<IUProduct>(
   }
 );
 productSchema.plugin(toJSON);
+productSchema.plugin(paginate);
 
-const Product = mongoose.model<IUProduct>('User', productSchema);
+const Product = mongoose.model<IProductDoc,IProductModel>('Product', productSchema);
 
 export default Product;

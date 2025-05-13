@@ -7,9 +7,7 @@ const router: Router = express.Router();
 
 router
   .route('/')
-  .post((req, res) => {
-  res.send('Producto creado');})
-  //.post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
+  .post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
   .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
 
 router
