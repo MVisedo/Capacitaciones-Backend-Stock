@@ -1,7 +1,5 @@
 import httpStatus from "http-status";
 import { catchAsync, pick } from "../utils";
-//import mongoose from "mongoose";
-//import { ApiError } from "../errors";
 import { productService } from ".";
 import { Request, Response } from "express";
 import { ApiError } from "../errors";

@@ -4,7 +4,7 @@
 import { validate } from "../../modules/validate";
 import { productController,productValidation } from "../../modules/product";
 import express,{ Router } from "express";
-import { auth } from "@/modules/auth";
+import { auth } from "../../modules/auth";
 
 const router:Router = express.Router()
 router.post('/',auth('manageProducts'),validate(productValidation.createProduct),productController.createProduct);
