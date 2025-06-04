@@ -1,6 +1,7 @@
 import { Document, Model } from "mongoose";
 import { QueryResult } from "../paginate/paginate";
 
+
 export interface IProduct {
     name:string,
     descripcion:string,

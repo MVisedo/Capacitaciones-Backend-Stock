@@ -45,6 +45,16 @@ export const updateProduct = {
     .min(1),
 };
 
+export const updateProductStock = {
+  params: Joi.object().keys({
+      productId: Joi.required().custom(objectId),
+    }),
+    body: Joi.object()
+      .keys({
+        cantidad: Joi.number()
+      }),
+};
+
 export const deleteProduct = {
   params: Joi.object().keys({
     productId: Joi.string().custom(objectId),
