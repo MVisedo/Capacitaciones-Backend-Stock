@@ -38,3 +38,23 @@ export const createStock = async (stockBody: IStock): Promise<StockOfProduct> =>
     await stock.save();
     return stock;
   };
+
+   /**
+     * Delete stock by productId
+     * @param {mongoose.Types.ObjectId} productId
+     * @returns {Promise<IStockDoc | null>}
+     */
+    export const deleteStockByProductId = async (productId: mongoose.Types.ObjectId): Promise<IStockDoc | null> => {
+      const stock = await getStockByProductId(productId);
+      if (!stock) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Stock not found');
+      }
+      await stock.deleteOne();
+      return stock;
+    };
+
+
+
+
+
+  
