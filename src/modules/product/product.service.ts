@@ -38,7 +38,7 @@ export const queryProducts = async (filter: Record<string, any>, options: IOptio
 };
 
   /**
-   * Update user by id
+   * Update product by id
    * @param {mongoose.Types.ObjectId} productId
    * @param {UpdateProductBody} updateBody
    * @returns {Promise<IProductDoc | null>}

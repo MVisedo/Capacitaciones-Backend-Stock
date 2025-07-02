@@ -10,7 +10,7 @@ import { IOptions } from "../paginate/paginate";
 
 export const createProduct = catchAsync(async (req: Request, res: Response) => {
     const product = await productService.createProduct(req.body);
-    res.status(httpStatus.CREATED).send(product);
+    res.status(httpStatus.CREATED).send({product});
 });
 
 
@@ -23,6 +23,7 @@ export const getProduct = catchAsync(async (req: Request, res: Response) => {
     res.send(product);
   }
 });
+
 
 export const getProducts = catchAsync(async (req: Request, res: Response) => {
   const filter = pick(req.query, ['name', 'precio']);
@@ -37,6 +38,7 @@ export const updateProduct = catchAsync(async (req: Request, res: Response) => {
     res.send(product);
   }
 });
+
 
 export const deleteProduct = catchAsync(async (req: Request, res: Response) => {
   if (typeof req.params['productId'] === 'string') {
