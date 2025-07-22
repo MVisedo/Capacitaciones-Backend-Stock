@@ -9,6 +9,7 @@ import { IOptions, QueryResult } from "../paginate/paginate";
 
 
 
+
 /**
  * Create a product
  * @param {IProduct} productBody
