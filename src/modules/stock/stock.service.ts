@@ -3,6 +3,7 @@ import { IStock, IStockDoc, StockOfProduct } from "./stock.interfaces";
 import Stock from "./stock.model";
 import { ApiError } from "../errors";
 import httpStatus from "http-status";
+import { publishToExchange } from "../rabbit/rabbit.publisher";
 
 /**
  * Create a stock
@@ -10,7 +11,18 @@ import httpStatus from "http-status";
  * @returns {Promise<IStockDoc>}
  */
 export const createStock = async (stockBody: IStock): Promise<StockOfProduct> => {
-    return Stock.create(stockBody);
+  const id = new mongoose.Types.ObjectId(); 
+
+  const stockWithId = {
+    ...stockBody,
+    _id: id,
+  };
+
+  
+  await publishToExchange('stock.stock.created', stockWithId);
+
+  
+  return Stock.create(stockWithId);
   };
 
   /**
@@ -36,6 +48,9 @@ export const createStock = async (stockBody: IStock): Promise<StockOfProduct> =>
     }
     Object.assign(stock, updateBody);
     await stock.save();
+
+    await publishToExchange('stock.stock.updated', {productId,updateBody});
+    
     return stock;
   };
 
@@ -50,6 +65,7 @@ export const createStock = async (stockBody: IStock): Promise<StockOfProduct> =>
         throw new ApiError(httpStatus.NOT_FOUND, 'Stock not found');
       }
       await stock.deleteOne();
+      await publishToExchange('stock.stock.deleted',productId);
       return stock;
     };
 
