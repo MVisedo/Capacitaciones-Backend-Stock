@@ -25,6 +25,9 @@ export async function startProductAndUserConsumer() {
       case 'productAndUser.user.created':
         await userService.createUser(data);
         break;
+      case 'productAndUser.user.registered':
+        await userService.registerUser(data);
+        break;
       case 'productAndUser.user.updated':
         await userService.updateUserById(data.userId, data.updateBody);
         break;
