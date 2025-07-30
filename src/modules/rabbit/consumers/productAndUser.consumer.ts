@@ -26,6 +26,7 @@ export async function startProductAndUserConsumer() {
         break;
       case 'productAndUser.product.deleted':
         await productService.deleteProductById(data);
+        await stockService.deleteStockByProductId(data);
         break;
 
       // User 
